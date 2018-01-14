@@ -1,0 +1,96 @@
+
+The game is: You are david (looks like '^'), and you need to reach your sheep ('*').
+			 You move in a world full of:
+			 	1. walls ("|", "-")
+			 	2. trees
+			 	3. bushes
+			 	4. monsters
+			 	5. ...
+			 which you cant touch. If you touch them - you will die, and the game will reset.
+			 you move with the arrow keys (↑→↓←).
+
+			 # Ver 1: This version will support the following capabillties:
+			 	#1 Creates a board
+			 	#2 Creates an animation
+			 	#3 Moves the animation by random directions
+			 	#4 The animation will recognize obstacles
+
+
+board
+	properties:
+		# board_limits - a tuple containing the max height and width of the board.
+		# all_board_elements - a list contains all board elemets (elements ids).
+		# board_elements_types - a dict of all elements types. the key will be the name, and the value wil be a hex value.
+		# board_index - a number which holds the current index of all elements.
+
+
+	objects:
+		# pos - a simple object which suppose to hold the position of board elements.
+		  		a position is the coordinates of an element.
+		  		the position needs to be in board limits.
+		  		the pos object must define:
+		  			properties:
+		  				# element_X_pos
+		  				# element_Y_pos
+		  			methods:
+		  				# _validate_coordinates - a function which validates the received coordinates (using board_limits).
+
+		# direction - a simple object which suppose to hold the direction of board elements.
+					  An direction is the diff between the current position of an element and its next pos.
+					  The direction object must define:
+					  	# element_X_diff
+					  	# element_Y_diff
+
+		# board_element - a generic object in the board. Its the most basic form of the element,
+						  the generic object must define:
+						  		properties:
+						  			# __id - an internal property which is the core id of the element.
+						  					 the core id of an element will be a hash of __type and __index.  
+						  			# __type - the type of the element
+						  			# __index - the index of the element (given at creation)
+						  			# board_element_repr - a character which represents the element.
+									# board_element_pos - a pos object, represents the position of the element.
+
+		# board_animation - a board element which can move and can be user-controlled/independent.
+						  	the board element must define:
+						  		properties:
+									# board_element_direction - a direction object, represents the direction of the element.
+						  		methods:
+									# move - a function which receives a direction object and move 
+							  				 the animation in the direction. 
+							  				 It will:
+							  				 	#1 Calculates the next pos
+							  				 	#2 Tests if the next pos is possible
+							  				 	#3 Clears the previous pos
+							  				 	#4 Prints the new pos
+									# _is_on_board_element - a function which checks if the animation on a board element.
+									# _clear_animation - a function which clears the animation from the board.
+									# _print_animation - a function which prints the new location of the animation.
+
+	methods:
+		# clear_screen - a function which clears the console.
+		# finish_game - a function which finishes the game.
+		# create_board - a function which creates all board elements. 
+		# print_board - a function which prints all board elements.
+player
+
+menu
+
+
+example:
+	
+	+----------
+	*   |
+	    |
+	    |
+
+
+
+
+
+    20,20_____________________
+	    |                    |
+	    |      |
+	    |  *   |
+	    |____________________|
+                              26,24 
